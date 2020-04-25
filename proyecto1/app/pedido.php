@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class cliente extends Model
+class pedido extends Model
 {
     public $timestamps = null;
 }
