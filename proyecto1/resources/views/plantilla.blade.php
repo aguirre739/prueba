@@ -25,8 +25,9 @@
       </div>
     </nav>
     @yield('contenido')        
-  
-    <footer class="footer article">
+    
+    <br>
+    <footer class="footer article mt-2">
       <div class="container"> 
         <span class="text-muted">
           <p>Final Programacion Web</p>

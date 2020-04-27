@@ -58,10 +58,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('altaDeCliente') }}">Registrarse</a>
+                    <a class="nav-link" href="{{ route('altaCadete') }}">Registrate Para ser Cadete</a>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
@@ -71,9 +70,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                <div class="card-header">Ingrese sus datos por favor</a></div>
+                <div class="card-header">Login de Cadetes</a></div>
                     <div class="card-body">
-                        <form action="{{ route('loginCliente')}}" method="POST">
+                        <form action="{{ route('loginCadete')}}" method="POST">
                             @csrf
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
@@ -108,10 +107,6 @@
     </div>
 
 </main>
-
-<center>
-    <a href="{{ route('altaCadete') }}">Quieres ser un cadete? Unetenos!!!</a>
-</center>
 
       
     <!-- Optional JavaScript -->

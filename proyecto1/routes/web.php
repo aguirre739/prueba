@@ -48,3 +48,14 @@ Route::get('altaCadete', function() {
 })->name('altaCadete');
 
 Route::post('altaCadete', 'cadeteAlta@altaDeCadete')->name('altaDeCadete');
+
+Route::get('loginCadete', function () {
+    return view('loginCadete');
+})->name('loginCadete');
+
+Route::post('loginCadete', 'loginCadete@loginCadete');
+
+Route::get('menuCadete', function ()
+{
+    return view('menuCadete');
+})->name('menuCadetes');

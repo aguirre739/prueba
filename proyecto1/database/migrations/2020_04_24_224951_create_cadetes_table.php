@@ -19,7 +19,7 @@ class CreateCadetesTable extends Migration
             $table->string('apellido');
             $table->string('cuil');
             $table->string('telefono');
-            $table->binary('foto');
+            $table->string('foto');
             $table->string('mail')->unique();
             $table->string('contrasenia');
         });

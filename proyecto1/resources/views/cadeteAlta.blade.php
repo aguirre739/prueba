@@ -38,14 +38,30 @@
         </div>
     </form>
 
-    @if ( session('mensaje') )
+    @if ( session('message') )
         <div class="container-fluid mt-3">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="alert alert-info">{{ session('mensaje') }}</div>
+                    <div class="alert alert-info">{{ session('message') }}</div>
                 </div>
             </div>    
         </div>
+    @endif
+
+    @if ( session('messageExito') )
+    <div class="container-fluid mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-info">{{ session('messageExito') }}</div>                                
+            </div>
+        </div>    
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <a href="">Ingresa ya!!!</a>
+            </div>
+        </div>    
+    </div>
     @endif
 
 

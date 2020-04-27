@@ -9,28 +9,39 @@ class cadeteAlta extends Controller
 {
     public function altaDeCadete(Request $request)
     {
-        $revisar = getimagesize($_FILES["foto"]["tmp_name"]);
-        if($revisar !== false)
-        {
-            $image = $_FILES['foto']['tmp_name'];
-            $imgContenido = file_get_contents($image);
+        $request->validate([
+            'mail' => 'unique:cadetes,mail',
+        ]);
 
-            $cadete = new App\cadete();
-            $cadete->nombre = $request->nombre;
-            $cadete->apellido = $request->apellido;
-            $cadete->cuil = $request->cuil;
-            $cadete->telefono = $request->telefono;
-            $cadete->foto = $imgContenido;
-            $cadete->mail = $request->mail;
-            $cadete->contrasenia = $request->contrasenia;
-            //$cadete->save();
-            var_dump($imgContenido);
-            //return back()->with('message', 'Se cargo correctamente');
+        if($request->contrasenia == $request->repitaContrasenia)
+        {
+            if ($request->hasFile('foto')) 
+            {
+                $name = time().$request->file('foto')->getClientOriginalName();
+                $request->file('foto')->move(public_path().'/fotoCadetes/', $name);
+    
+                $cadete = new App\cadete();
+                $cadete->nombre = $request->nombre;
+                $cadete->apellido = $request->apellido;
+                $cadete->cuil = $request->cuil;
+                $cadete->telefono = $request->telefono;
+                $cadete->foto = $name;
+                $cadete->mail = $request->mail;
+                $cadete->contrasenia = password_hash($request->contrasenia, PASSWORD_DEFAULT);
+    
+                $cadete->save();
+                return back()->with('messageExito', 'Se Cargo el cadete satisfactoriamente');
+            }
+            else
+            {
+                return back()->with('message', 'error al cargar la imagen');
+            }
         }
         else
         {
-            return back()->with('message', 'error al cargar la imagen');
+            return back()->with('message', 'Las contraseñas no coinciden');
         }
+        
        
 
     }
