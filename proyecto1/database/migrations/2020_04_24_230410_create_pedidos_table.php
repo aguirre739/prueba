@@ -16,18 +16,21 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('idpedidos');
             $table->string('direccionOrigen');
-            $table->string('departamentoOrigen');
+            $table->string('latitudOrigen');
+            $table->string('longitudOrigen');
+            $table->string('departamentoOrigen')->nullable();
             $table->string('telefonoOrigen');
-            $table->string('comentarioOrigen');
+            $table->string('comentarioOrigen')->nullable();
             $table->string('direccionDestino');
-            $table->string('detamentoDestino');
+            $table->string('detamentoDestino')->nullable();
             $table->string('telefonoDestino');
-            $table->string('comentarioDestino');
+            $table->string('comentarioDestino')->nullable();
             $table->unsignedBigInteger('id_tiposDeArticulo');
             $table->foreign('id_tiposDeArticulo')->references('idtipos_de_articulos')->on('tipos_de_articulos');
             $table->float('valorDeArticulo');
             $table->string('tipoDePago');
             $table->float('montoDePago');
+            $table->string('estado');
             $table->unsignedBigInteger('clientes_idclientes');
             $table->foreign('clientes_idclientes')->references('idclientes')->on('clientes');
             $table->unsignedBigInteger('cadetes_idcadetes')->nullable();

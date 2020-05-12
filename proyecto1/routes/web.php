@@ -59,3 +59,9 @@ Route::get('menuCadete', function ()
 {
     return view('menuCadete');
 })->name('menuCadetes');
+
+Route::get('empezarRepartos', function () {
+    return view('empezarARepartir');
+})->name('empezarARepartir');
+
+// Route::post('buscarPedidos', 'pedidos@buscarPedidos');
