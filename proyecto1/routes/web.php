@@ -65,3 +65,8 @@ Route::get('empezarRepartos', function () {
 })->name('empezarARepartir');
 
 // Route::post('buscarPedidos', 'pedidos@buscarPedidos');
+
+
+Route::get('mostrarPedido/{idpedido?}', 'pedidos@mostrarPedido');
+
+Route::post('decisionDePedido', 'pedidos@decisionDePedido')->name('decisionDePedido');

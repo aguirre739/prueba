@@ -90,6 +90,26 @@ class pedidos extends Controller
       
     }
 
+    public function mostrarPedido($idpedido)
+    {
+        $pedido = App\pedido::findOrFail($idpedido);
+        $articulo = App\tiposDeArticulo::findOrFail($pedido->id_tiposDeArticulo);
+        return view('mostrarPedidosAlCadete', compact('pedido', 'articulo'));
+    }
+
+    public function decisionDePedido(Request $request)
+    {
+        if(isset($request->btnAceptar))
+        {
+            echo "se acepto el pedido ".$request->btnAceptar;
+            
+        }
+
+        if(isset($request->btnRechazar))
+        {
+            echo "se rechazo el pedido ".$request->btnRechazar;
+        }
+    }
   
     
 }

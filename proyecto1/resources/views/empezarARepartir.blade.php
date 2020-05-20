@@ -38,10 +38,15 @@
             method: 'POST',
             body: data
         })
-        .then(res => res.text())
+        .then(res => res.json())
         .then(data =>{
 
-            console.log(data);
+            if(data != 0)
+            {
+                console.log(data);
+                //console.log("../public/mostrarPedido/"+data.idpedido);
+                location.href ="../public/mostrarPedido/"+data.idpedido;
+            }         
 
         });
     }
