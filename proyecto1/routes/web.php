@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('index', function () {
+    return view('index');
+});
+
 Route::get('prueba', function () {
     return view('prueba');
 });
@@ -25,7 +29,7 @@ Route::get('login', function (){
     return view('login');
 })->name('login');
 
-Route::post('nuevocliente', 'clienteAlta@altaDecliente')->name('altaDeCliente'); 
+Route::post('nuevocliente', 'clienteAlta@altaDecliente')->name('altaDeCliente');
 
 Route::get('nuevocliente', function () {
     return view('ClienteAlta');
