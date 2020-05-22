@@ -44,22 +44,22 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images/camioncito.png" class="d-block w-75" alt="...">
-            <div class="carousel-caption text-dark d-md-block">
+            <img src="images/camioncito.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none text-dark d-md-block">
               <h5>Pedi de donde quieras...</h5>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/motito.png" class="d-block w-75" alt="...">
-            <div class="carousel-caption text-dark d-md-block">
+            <img src="images/motito.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none text-dark d-md-block">
               <h5>Elegi lo que queres pedir...</h5>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="images/motito2.png" class="d-block w-75" alt="...">
-            <div class="carousel-caption text-dark d-md-block">
+            <img src="images/motito2.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none text-dark d-md-block">
               <h5>Seguí tu pedido...</h5>
               <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
             </div>
@@ -78,7 +78,7 @@
     <article class="container">
             <div class="jumbotron jumbotron-fluid bg-white">
                 <div class="container text-center">
-                  <h1 class="display-1 text-bold">Urbanenvios</h1>
+                  <h1 class="display-3 text-bold">Urbanenvios</h1>
                   <h6 class="display-4 lead mt-2">Bienvenidos</h6>
                 </div>
             </div>
