@@ -2,7 +2,7 @@
 
 @section('contenido')
     <br><br><br>
-    <h3 class="text-center">Menu Cadetes</h3>
+    <h3 class="text-center">Menu Cadetes{{ Cookie::get('cadete') }}</h3>
 
     <div class="container-fluid mt-5">
         <div class="d-flex justify-content-center">
