@@ -44,11 +44,11 @@
                     @csrf
                     <div class="form-group">
                             <label>Usuario o Email</label>
-                            <input type="text" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required="">
+                            <input type="text" name="mail" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required="">
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" placeholder="contraseña" required="">
+                            <input type="password" name="contrasenia" class="form-control" placeholder="contraseña" required="">
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input">

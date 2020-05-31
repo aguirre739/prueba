@@ -41,12 +41,14 @@
         .then(res => res.json())
         .then(data =>{
 
-            if(data != 0)
+            if(data.idpedido != false)
             {
-                console.log(data);
                 //console.log("../public/mostrarPedido/"+data.idpedido);
                 location.href ="../public/mostrarPedido/"+data.idpedido;
-            }         
+            }
+            else
+            {
+            }        
 
         });
     }

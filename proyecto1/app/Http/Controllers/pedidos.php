@@ -54,7 +54,7 @@ class pedidos extends Controller
         $results = DB::select('SELECT idpedidos, latitudOrigen, longitudOrigen FROM pedidos WHERE cadetes_idcadetes IS NULL');
         //var_dump($request->session()->get('idCadete'));
         $idPedido = 0;
-        $distancia = 20000;
+        $distancia = 20;
         foreach($results as $row)
         {
             $results2 = DB::select('SELECT * FROM pedido_rechazados WHERE cadetes_idcadetes = ? AND pedidos_idpedidos = ?', [session('idCadete'), $row->idpedidos]);
@@ -66,6 +66,7 @@ class pedidos extends Controller
             else
             {
                 $distanciaReal = App\pedido::distanceCalculation($row->latitudOrigen, $row->longitudOrigen, $request->latitud, $request->longitud);
+                //var_dump($distanciaReal);
                 if($distanciaReal < $distancia)
                 {
                     $distancia = $distanciaReal;

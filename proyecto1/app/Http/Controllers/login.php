@@ -10,6 +10,7 @@ class login extends Controller
     public function loginCliente(Request $request)
     {       
         $cliente = App\cliente::where('mail', $request->mail)->get();
+      
         if($cliente->count() > 0)
         {
             if(password_verify($request->contrasenia, $cliente[0]->contrasenia))
