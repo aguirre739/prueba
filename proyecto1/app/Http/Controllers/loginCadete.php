@@ -3,26 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cockie;
 use App;
-use Illuminate\Support\Facades\Cookie;
 
 class loginCadete extends Controller
 {
     public function loginCadete(Request $request)
     {       
-        $cadete = App\cadete::where('mail', $request->mail)->get();
-
-        //var_dump($cliente);
-        if($cadete->count() > 0)
+        $cliente = App\cadete::where('mail', $request->mail)->get();
+        if($cliente->count() > 0)
         {
-            if(password_verify($request->contrasenia, $cadete[0]->contrasenia))
-            {    
-                Cookie::queue('idCadete', $cadete[0]->idcadetes);     
-                Cookie::queue('cadete', $cadete[0]->nombre." ".$cadete[0]->apellido);            
-       
-                $request->session()->put('idCadete', $cadete[0]->idcadetes);
-                $request->session()->put('cadete', $cadete[0]->nombre." ".$cadete[0]->apellido);
+            if(password_verify($request->contrasenia, $cliente[0]->contrasenia))
+            {                
+                $request->session()->put('idCadete', $cliente[0]->idclientes);
+                $request->session()->put('cadete', $cliente[0]->nombre." ".$cliente[0]->apellido);
                 return redirect('menuCadete');
             }
             else

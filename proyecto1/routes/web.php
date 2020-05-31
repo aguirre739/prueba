@@ -60,7 +60,7 @@ Route::get('loginCadete', function () {
 Route::post('loginCadete', 'loginCadete@loginCadete');
 
 Route::get('menuCadete', function ()
-{    
+{
     return view('menuCadete');
 })->name('menuCadetes');
 

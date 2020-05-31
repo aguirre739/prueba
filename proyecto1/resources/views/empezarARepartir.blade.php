@@ -2,7 +2,7 @@
 
 @section('contenido')
 <br><br><br>
-<h2 class="text-center">Aqui se mostrara cuando se te asignen pedidos, asi q se paciente {{  Cookie::get('idCadete')}}</h2>
+<h2 class="text-center">Aqui se mostrara cuando se te asignen pedidos, asi q se paciente</h2>
     
 @endsection
 
@@ -34,20 +34,17 @@
         const data = new FormData();
         data.append('latitud', latitude);
         data.append('longitud', longitude);
-        data.append('idcadete', {{ session('idCadete') }});
         fetch('../public/api/buscarPedidos', {
             method: 'POST',
             body: data
         })
         .then(res => res.json())
         .then(data =>{
-            
-            console.log(data);
-                            
+
             if(data != 0)
             {
                 console.log(data);
-                console.log("../public/mostrarPedido/"+data.idpedido);
+                //console.log("../public/mostrarPedido/"+data.idpedido);
                 location.href ="../public/mostrarPedido/"+data.idpedido;
             }         
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App;
-use Cookie;
 use App\Http\Controllers;
 use App\pedido;
 use Symfony\Component\VarDumper\VarDumper;
@@ -51,22 +50,18 @@ class pedidos extends Controller
     }
 
     public function buscarPedidos(Request $request)
-    {   
-        //var_dump("cockie ".$request->cookie('idCadete'));
-        
-        //$valor = $request->cookie('idCadete');
-        $valor = $request->idcadete;
+    {
         $results = DB::select('SELECT idpedidos, latitudOrigen, longitudOrigen FROM pedidos WHERE cadetes_idcadetes IS NULL');
-        //var_dump($results);
+        //var_dump($request->session()->get('idCadete'));
         $idPedido = 0;
         $distancia = 20000;
         foreach($results as $row)
         {
-            $results2 = DB::select('SELECT * FROM pedido_rechazados WHERE cadetes_idcadetes = ? AND pedidos_idpedidos = ?', [$valor , $row->idpedidos]);
-
+            $results2 = DB::select('SELECT * FROM pedido_rechazados WHERE cadetes_idcadetes = ? AND pedidos_idpedidos = ?', [session('idCadete'), $row->idpedidos]);
+            //var_dump($results2);
             if(count($results2) > 0)
             {
-                
+
             }
             else
             {
@@ -79,7 +74,7 @@ class pedidos extends Controller
             }           
         }
         
-        $datos = App\pedido::findOrFail($idPedido);
+        // $datos = App\pedido::findOrFail($idPedido);
         if ($idPedido != 0)
         {
             return response()->json([
@@ -104,24 +99,15 @@ class pedidos extends Controller
 
     public function decisionDePedido(Request $request)
     {
-        //echo "asd ".$request->session()->get('idCadete');;
         if(isset($request->btnAceptar))
         {
             echo "se acepto el pedido ".$request->btnAceptar;
-            $pedido = App\pedido::find($request->btnAceptar);
-            $pedido->cadetes_idcadetes = $request->session()->get("idCadete");
-            $pedido->save();
+            
         }
 
         if(isset($request->btnRechazar))
         {
             echo "se rechazo el pedido ".$request->btnRechazar;
-            $pedido_rechazado = new App\pedidoRechazado();
-            $pedido_rechazado->cadetes_idcadetes = $request->session()->get("idCadete");
-            $pedido_rechazado->pedidos_idpedidos = $request->btnRechazar;
-            $pedido_rechazado->fechaHora = date('Y-m-d H:i:s');
-            $pedido_rechazado->save();
-            return redirect('empezarRepartos');
         }
     }
   
