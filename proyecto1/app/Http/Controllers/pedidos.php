@@ -57,7 +57,7 @@ class pedidos extends Controller
         $distancia = 20;
         foreach($results as $row)
         {
-            $results2 = DB::select('SELECT * FROM pedido_rechazados WHERE cadetes_idcadetes = ? AND pedidos_idpedidos = ?', [session('idCadete'), $row->idpedidos]);
+            $results2 = DB::select('SELECT * FROM pedido_rechazados WHERE cadetes_idcadetes = ? AND pedidos_idpedidos = ?', [$request->idCadete, $row->idpedidos]);
             //var_dump($results2);
             if(count($results2) > 0)
             {
@@ -102,13 +102,28 @@ class pedidos extends Controller
     {
         if(isset($request->btnAceptar))
         {
-            echo "se acepto el pedido ".$request->btnAceptar;
+            $pedido = App\pedido::find($request->btnAceptar);
+
+            $pedido->cadetes_idcadetes = $request->session()->get('idCadete');
+            $pedido->estado = "asginado";
+            //echo "se acepto el pedido ".$request->btnAceptar;
+            var_dump("pedido q se acepto".$pedido);
+
             
         }
 
         if(isset($request->btnRechazar))
         {
-            echo "se rechazo el pedido ".$request->btnRechazar;
+            $pedidoRechazado = new App\pedidoRechazado();
+
+            $pedidoRechazado->cadetes_idcadetes = $request->session()->get('idCadete');
+            $pedidoRechazado->pedidos_idpedidos = $request->btnRechazar;
+            $pedidoRechazado->fechaHora = date("Y-m-d H:i:s");
+            //var_dump("pedido rechazado ".$pedidoRechazado);
+
+            $pedidoRechazado->save();
+            return redirect(route('empezarARepartir'));
+            //echo "se rechazo el pedido ".$request->btnRechazar;
         }
     }
   

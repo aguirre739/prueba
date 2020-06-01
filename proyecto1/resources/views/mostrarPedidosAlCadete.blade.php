@@ -37,7 +37,9 @@
                             <p class="card-text">{{ $pedido->comentarioDestino }}</p>                        
 
                             <button type="submit" class="btn btn-success card-link" name="btnAceptar" value="{{ $pedido->idpedidos }}">Aceptar</button>
-                            <button type="submit" class="btn btn-danger card-link" name="btnRechazar" value="{{ $pedido->idpedidos }}">Rechazar</button>
+                            <button type="submit" class="btn btn-danger card-link" id="btnRechazar" name="btnRechazar" value="{{ $pedido->idpedidos }}">Rechazar</button>
+
+                            <div><span></span></div>
                         </div>
                     </div>        
                 </form>
@@ -46,3 +48,18 @@
     </div> 
 
 @endsection
+
+<script type="text/javascript">
+
+    var tiempo = 46;
+
+    setInterval(function (){
+        tiempo = tiempo - 1;
+        document.getElementById('btnRechazar').innerHTML = "Rechazar ("+tiempo+")";
+    }, 1000);
+
+    setTimeout(function (){
+        document.getElementById('btnRechazar').click();
+    }, 46000);
+  
+</script>

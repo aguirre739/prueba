@@ -34,6 +34,8 @@
         const data = new FormData();
         data.append('latitud', latitude);
         data.append('longitud', longitude);
+        data.append('idCadete', {{ session('idCadete') }});
+
         fetch('../public/api/buscarPedidos', {
             method: 'POST',
             body: data
@@ -53,7 +55,11 @@
         });
     }
     
-    setInterval(navigator.geolocation.getCurrentPosition(success, error, options), 30000);
+    setInterval(function () {
+
+        navigator.geolocation.getCurrentPosition(success, error, options)
+    
+    }, 30000);
 
     
 </script>
