@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('plantillaCadete')
 
 @section('contenido')
     <br><br><br>

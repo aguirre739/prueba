@@ -74,3 +74,9 @@ Route::get('empezarRepartos', function () {
 Route::get('mostrarPedido/{idpedido?}', 'pedidos@mostrarPedido');
 
 Route::post('decisionDePedido', 'pedidos@decisionDePedido')->name('decisionDePedido');
+
+Route::get('retirarPedido', 'pedidos@retirarPedido')->name('retirarPedido');
+
+Route::get('entregarPedido', 'pedidos@entregarPedido')->name('entregarPedido');
+
+Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinalizado');

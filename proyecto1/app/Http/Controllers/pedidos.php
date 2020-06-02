@@ -73,8 +73,8 @@ class pedidos extends Controller
                     $idPedido = $row->idpedidos;
                 }
             }           
-        }
-        
+        }       
+
         // $datos = App\pedido::findOrFail($idPedido);
         if ($idPedido != 0)
         {
@@ -91,8 +91,9 @@ class pedidos extends Controller
       
     }
 
-    public function mostrarPedido($idpedido)
+    public function mostrarPedido(Request $request ,$idpedido)
     {
+        $request->session()->put('idPedido', $idpedido);
         $pedido = App\pedido::findOrFail($idpedido);
         $articulo = App\tiposDeArticulo::findOrFail($pedido->id_tiposDeArticulo);
         return view('mostrarPedidosAlCadete', compact('pedido', 'articulo'));
@@ -103,13 +104,11 @@ class pedidos extends Controller
         if(isset($request->btnAceptar))
         {
             $pedido = App\pedido::find($request->btnAceptar);
-
             $pedido->cadetes_idcadetes = $request->session()->get('idCadete');
             $pedido->estado = "asginado";
+            $pedido->save();
             //echo "se acepto el pedido ".$request->btnAceptar;
-            var_dump("pedido q se acepto".$pedido);
-
-            
+            return redirect(route('retirarPedido'));
         }
 
         if(isset($request->btnRechazar))
@@ -125,6 +124,32 @@ class pedidos extends Controller
             return redirect(route('empezarARepartir'));
             //echo "se rechazo el pedido ".$request->btnRechazar;
         }
+    }
+
+    public function retirarPedido(Request $request)
+    {
+        $pedido = App\pedido::find($request->session()->get('idPedido'));
+        $direccionO = str_replace(' ','+', $pedido->direccionOrigen);
+
+        return view('retirarPedido', compact('pedido', 'direccionO'));
+
+    }
+
+    public function entregarPedido(Request $request)
+    {
+        $pedido = App\pedido::find($request->session()->get('idPedido'));
+        $pedido->estado = "En camino";
+        $pedido->save();
+        $direccionD = str_replace(' ','+', $pedido->direccionDestino);
+        return view('entregarPedido', compact('pedido', 'direccionD'));
+    }
+
+    public function pedidoFinalizado(Request $request)
+    {
+        $pedido = App\pedido::find($request->session()->get('idPedido'));
+        $pedido->estado = "Finalizado";
+        $pedido->save();
+        return view('pedidoFinalizado');
     }
   
     

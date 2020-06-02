@@ -9,13 +9,13 @@ class loginCadete extends Controller
 {
     public function loginCadete(Request $request)
     {       
-        $cliente = App\cadete::where('mail', $request->mail)->get();
-        if($cliente->count() > 0)
+        $cadete = App\cadete::where('mail', $request->mail)->get();
+        if($cadete->count() > 0)
         {
-            if(password_verify($request->contrasenia, $cliente[0]->contrasenia))
+            if(password_verify($request->contrasenia, $cadete[0]->contrasenia))
             {                
-                $request->session()->put('idCadete', $cliente[0]->idclientes);
-                $request->session()->put('cadete', $cliente[0]->nombre." ".$cliente[0]->apellido);
+                $request->session()->put('idCadete', $cadete[0]->idcadetes);
+                $request->session()->put('cadete', $cadete[0]->nombre." ".$cadete[0]->apellido);
                 return redirect('menuCadete');
             }
             else

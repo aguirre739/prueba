@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('plantillaCadete')
 
 @section('contenido')
 <br><br><br>
@@ -43,6 +43,8 @@
         .then(res => res.json())
         .then(data =>{
 
+            console.log(data);
+
             if(data.idpedido != false)
             {
                 //console.log("../public/mostrarPedido/"+data.idpedido);
@@ -59,7 +61,7 @@
 
         navigator.geolocation.getCurrentPosition(success, error, options)
     
-    }, 30000);
+    }, 10000);
 
     
 </script>
