@@ -27,26 +27,65 @@ class pedidos extends Controller
         $longitud = $outputFrom->results[0]->geometry->location->lng;
 
         $pedido = new App\pedido();
-        $pedido->direccionOrigen = $request->direccionDeOrigen;
+        $pedido->direccionOrigen = App\funciones::quitar_tildes($request->direccionDeOrigen);
         $pedido->latitudOrigen = $latitud;
         $pedido->longitudOrigen = $longitud; 
         $pedido->departamentoOrigen = $request->departamentoOrigen;
         $pedido->telefonoOrigen = $request->telefonoDeOrigen;
         $pedido->comentarioOrigen = $request->comentarioOrigen;
-        $pedido->direccionDestino = $request->direccionDeDestino;
+        $pedido->direccionDestino = App\funciones::quitar_tildes($request->direccionDeDestino);
         $pedido->detamentoDestino = $request->departamentoDestino;
+        //
+
+        $formattedAddrTo = str_replace(' ','+',$request->direccionDeDestino);
+		$geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrTo.'&key=AIzaSyAA2XqjdwJNuZUOy-fmLKo9fS5Taueqe1s');
+        $outputTo = json_decode($geocodeFrom);
+        
+        $latitudD = $outputFrom->results[0]->geometry->location->lat;
+        $longitudD = $outputFrom->results[0]->geometry->location->lng;
+
+        $distanciaReal = App\pedido::distanceCalculation($latitud, $longitud, $latitudD, $longitudD);
+
+        $precios = App\precio::all();
+
+        foreach($precios as $row)
+        {
+            if($distanciaReal > $row->distancia)
+            {
+
+            }
+            else
+            {
+                $pedido->montoDePago = $row->costo;
+                break;
+            }
+        }
+
+        //
         $pedido->telefonoDestino = $request->telefonoDestino;
         $pedido->comentarioDestino = $request->comentarioDestino;
         $pedido->id_tiposDeArticulo = $request->tipoDeArticulo;
         $pedido->valorDeArticulo = $request->valorEstimado;
         $pedido->tipoDePago = "Efectivo";
-        $pedido->montoDePago = $request->montoTotal;
         $pedido->estado = "nuevo";
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
         //$pedido->cadetes_idcadetes = null;
-        $pedido->save();
+        //$pedido->save();
 
-        return "Pedido creado satisfactoriamente (falta crear vista para esto u.u)";
+        //return "Pedido creado satisfactoriamente (falta crear vista para esto u.u)";
+
+        $request->session()->put('pedidoCompleto', $pedido);
+
+        return view('confirmarPedido', compact('pedido'));
+
+        //var_dump($pedido);
+    }
+
+    public function confirmarPedido(Request $request)
+    {
+        $pedido = $request->session()->get('pedidoCompleto');
+        $pedido->save();
+        return view('mensajeFinalizadoPedido');
     }
 
     public function buscarPedidos(Request $request)

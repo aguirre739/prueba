@@ -46,6 +46,8 @@ Route::get('pedidos', 'pedidos@realizarPedidos')->name('pedidos');
 
 Route::post('pedidos', 'pedidos@finalizarPedido')->name('finalizarPedido');
 
+Route::post('confirmarPedido', 'pedidos@confirmarPedido')->name('confirmarPedido');
+
 
 Route::get('altaCadete', function() {
     return view('cadeteAlta');

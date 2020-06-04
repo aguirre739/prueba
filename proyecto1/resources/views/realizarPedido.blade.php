@@ -12,19 +12,19 @@
                     Direccion de Origen
                     <input type="text" class="form-control" placeholder="Direccion de Origen" name="direccionDeOrigen" value="{{ old('direccionDeOrigen') }}" required>
                     Depoartamento Origen
-                    <input type="text" class="form-control" placeholder="Depoartamento Origen" name="departamentoOrigen" value="{{ old('departamentoOrigen') }}" required>
+                    <input type="text" class="form-control" placeholder="Depoartamento Origen" name="departamentoOrigen" value="{{ old('departamentoOrigen') }}">
                     Telefono de Origen
                     <input type="text" class="form-control" placeholder="Telefono de Origen" name="telefonoDeOrigen" value="{{ old('telefonoDeOrigen') }}" required> 
                     Comentario
-                    <input type="text" class="form-control" placeholder="Comentario" name="comentarioOrigen" value="{{ old('comentarioOrigen') }}" required>
+                    <input type="text" class="form-control" placeholder="Comentario" name="comentarioOrigen" value="{{ old('comentarioOrigen') }}">
                     Direccion de Destino
                     <input type="text" class="form-control" placeholder="Direccion de Destino" name="direccionDeDestino" value="{{ old('direccionDeDestino') }}" required>
                     Departamento Destino                    
-                    <input type="text" class="form-control" placeholder="Departamento Destino" name="departamentoDestino" value="{{ old('departamentoDestino') }}" required>
+                    <input type="text" class="form-control" placeholder="Departamento Destino" name="departamentoDestino" value="{{ old('departamentoDestino') }}">
                     Telefono Destino
                     <input type="text" class="form-control" placeholder="Telefono Destino" name="telefonoDestino" value="{{ old('telefonoDestino') }}" required>
                     Comentario 
-                    <input type="text" class="form-control" placeholder="Comentario" name="comentarioDestino" value="{{ old('comentarioDestino') }}" required>
+                    <input type="text" class="form-control" placeholder="Comentario" name="comentarioDestino" value="{{ old('comentarioDestino') }}">
                     Tipo de Articulo
                     <select class="form-control" name="tipoDeArticulo" value="{{ old('tipoDeArticulo') }}">
                     @foreach ($tipos_de_articulos as $item)
@@ -33,9 +33,7 @@
                     </select>
                     Valor Estimado
                     <input type="text" class="form-control" placeholder="Valor Estimado" name="valorEstimado" value="{{ old('valorEstimado') }}" required>
-                    Monto total
-                    <input type="text" class="form-control" placeholder="Monto total" name="montoTotal" value="{{ old('montoTotal') }}" required>
-
+                 
                     <button type="submit" class="btn btn-primary mt-3">Realizar Pedido</button>                    
                 </div>
             </div>    
