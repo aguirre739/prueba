@@ -39,10 +39,10 @@ class pedidos extends Controller
 
         $formattedAddrTo = str_replace(' ','+',$request->direccionDeDestino);
 		$geocodeTo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$formattedAddrTo.'&key=AIzaSyAA2XqjdwJNuZUOy-fmLKo9fS5Taueqe1s');
-        $outputTo = json_decode($geocodeFrom);
+        $outputTo = json_decode($geocodeTo);
         
-        $latitudD = $outputFrom->results[0]->geometry->location->lat;
-        $longitudD = $outputFrom->results[0]->geometry->location->lng;
+        $latitudD = $outputTo->results[0]->geometry->location->lat;
+        $longitudD = $outputTo->results[0]->geometry->location->lng;
 
         $distanciaReal = App\pedido::distanceCalculation($latitud, $longitud, $latitudD, $longitudD);
 
@@ -50,9 +50,10 @@ class pedidos extends Controller
 
         foreach($precios as $row)
         {
+            //echo $distanciaReal. " y row distancia: ".$row->distancia."<br>";
             if($distanciaReal > $row->distancia)
             {
-
+                //echo "for: ".$distanciaReal. " y row distancia: ".$row->distancia."<br>";
             }
             else
             {
@@ -69,11 +70,7 @@ class pedidos extends Controller
         $pedido->tipoDePago = "Efectivo";
         $pedido->estado = "nuevo";
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
-        //$pedido->cadetes_idcadetes = null;
-        //$pedido->save();
-
-        //return "Pedido creado satisfactoriamente (falta crear vista para esto u.u)";
-
+        
         $request->session()->put('pedidoCompleto', $pedido);
 
         return view('confirmarPedido', compact('pedido'));
