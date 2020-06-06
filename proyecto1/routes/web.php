@@ -42,11 +42,11 @@ Route::get('menuPrincipal', function () {
 })->name('menuPrincipal')->middleware('autenticacion');
 
 
-Route::get('pedidos', 'pedidos@realizarPedidos')->name('pedidos');
+Route::get('pedidos', 'pedidos@realizarPedidos')->name('pedidos')->middleware('autenticacion');
 
-Route::post('pedidos', 'pedidos@finalizarPedido')->name('finalizarPedido');
+Route::post('pedidos', 'pedidos@finalizarPedido')->name('finalizarPedido')->middleware('autenticacion');
 
-Route::post('confirmarPedido', 'pedidos@confirmarPedido')->name('confirmarPedido');
+Route::post('confirmarPedido', 'pedidos@confirmarPedido')->name('confirmarPedido')->middleware('autenticacion');
 
 
 Route::get('altaCadete', function() {
@@ -64,21 +64,21 @@ Route::post('loginCadete', 'loginCadete@loginCadete');
 Route::get('menuCadete', function ()
 {
     return view('menuCadete');
-})->name('menuCadetes');
+})->name('menuCadetes')->middleware('autenticacionCadete');
 
 Route::get('empezarRepartos', function () {
     return view('empezarARepartir');
-})->name('empezarARepartir');
+})->name('empezarARepartir')->middleware('autenticacionCadete');
 
 // Route::post('buscarPedidos', 'pedidos@buscarPedidos');
 
 
-Route::get('mostrarPedido/{idpedido?}', 'pedidos@mostrarPedido');
+Route::get('mostrarPedido/{idpedido?}', 'pedidos@mostrarPedido')->middleware('autenticacionCadete');
 
-Route::post('decisionDePedido', 'pedidos@decisionDePedido')->name('decisionDePedido');
+Route::post('decisionDePedido', 'pedidos@decisionDePedido')->name('decisionDePedido')->middleware('autenticacionCadete');
 
-Route::get('retirarPedido', 'pedidos@retirarPedido')->name('retirarPedido');
+Route::get('retirarPedido', 'pedidos@retirarPedido')->name('retirarPedido')->middleware('autenticacionCadete');
 
-Route::get('entregarPedido', 'pedidos@entregarPedido')->name('entregarPedido');
+Route::get('entregarPedido', 'pedidos@entregarPedido')->name('entregarPedido')->middleware('autenticacionCadete');
 
-Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinalizado');
+Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinalizado')->middleware('autenticacionCadete');
