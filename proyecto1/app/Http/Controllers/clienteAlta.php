@@ -22,7 +22,7 @@ class clienteAlta extends Controller
             $cliente->mail = $request->mail;
             $cliente->contrasenia = password_hash($request->contrasenia, PASSWORD_DEFAULT);        
             $cliente->save();         
-            return back()->with('mensaje', 'Usario Registrado');  
+            return view('clienteCreado');
         }
         else
         {

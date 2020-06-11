@@ -30,7 +30,7 @@ class cadeteAlta extends Controller
                 $cadete->contrasenia = password_hash($request->contrasenia, PASSWORD_DEFAULT);
     
                 $cadete->save();
-                return back()->with('messageExito', 'Se Cargo el cadete satisfactoriamente');
+                return view('cadeteCreado');
             }
             else
             {
