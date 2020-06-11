@@ -114,6 +114,10 @@ class pedidos extends Controller
         // $datos = App\pedido::findOrFail($idPedido);
         if ($idPedido != 0)
         {
+            $pedido = App\pedido::findOrFail($idPedido);
+            $pedido->cadetes_idcadetes = $request->idCadete;
+            $pedido->save();
+
             return response()->json([
                 "idpedido" => $idPedido
             ], 200);
@@ -140,7 +144,7 @@ class pedidos extends Controller
         if(isset($request->btnAceptar))
         {
             $pedido = App\pedido::find($request->btnAceptar);
-            $pedido->cadetes_idcadetes = $request->session()->get('idCadete');
+            //$pedido->cadetes_idcadetes = $request->session()->get('idCadete');
             $pedido->estado = "asginado";
             $pedido->save();
             //echo "se acepto el pedido ".$request->btnAceptar;
@@ -149,6 +153,8 @@ class pedidos extends Controller
 
         if(isset($request->btnRechazar))
         {
+            DB::update('UPDATE pedidos SET cadetes_idcadetes = null WHERE pedidos.idpedidos = ?', [$request->btnRechazar]);
+
             $pedidoRechazado = new App\pedidoRechazado();
 
             $pedidoRechazado->cadetes_idcadetes = $request->session()->get('idCadete');

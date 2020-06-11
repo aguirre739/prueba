@@ -82,3 +82,6 @@ Route::get('retirarPedido', 'pedidos@retirarPedido')->name('retirarPedido')->mid
 Route::get('entregarPedido', 'pedidos@entregarPedido')->name('entregarPedido')->middleware('autenticacionCadete');
 
 Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinalizado')->middleware('autenticacionCadete');
+
+//cerrar la sesiones de usuario
+Route::get('logoutUsuario', 'login@logout')->name('logoutUsuario');
