@@ -66,9 +66,7 @@ Route::get('menuCadete', function ()
     return view('menuCadete');
 })->name('menuCadetes')->middleware('autenticacionCadete');
 
-Route::get('empezarRepartos', function () {
-    return view('empezarARepartir');
-})->name('empezarARepartir')->middleware('autenticacionCadete');
+Route::get('empezarRepartos', 'pedidos@empezarRepartos')->name('empezarARepartir')->middleware('autenticacionCadete');
 
 // Route::post('buscarPedidos', 'pedidos@buscarPedidos');
 

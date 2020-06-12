@@ -68,7 +68,7 @@ class pedidos extends Controller
         $pedido->id_tiposDeArticulo = $request->tipoDeArticulo;
         $pedido->valorDeArticulo = $request->valorEstimado;
         $pedido->tipoDePago = "Efectivo";
-        $pedido->estado = "nuevo";
+        $pedido->estado = "Nuevo";
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
         
         $request->session()->put('pedidoCompleto', $pedido);
@@ -145,7 +145,7 @@ class pedidos extends Controller
         {
             $pedido = App\pedido::find($request->btnAceptar);
             //$pedido->cadetes_idcadetes = $request->session()->get('idCadete');
-            $pedido->estado = "asginado";
+            $pedido->estado = "Asignado";
             $pedido->save();
             //echo "se acepto el pedido ".$request->btnAceptar;
             return redirect(route('retirarPedido'));
@@ -192,6 +192,34 @@ class pedidos extends Controller
         $pedido->estado = "Finalizado";
         $pedido->save();
         return view('pedidoFinalizado');
+    }
+
+    public function empezarRepartos(Request $request)
+    {
+        //primero busca si no tiene pedidos pendientes
+        $results = DB::select("SELECT * FROM pedidos WHERE pedidos.cadetes_idcadetes = ? AND pedidos.estado = 'Asignado' OR pedidos.estado = 'En camino'", [$request->session()->get('idCadete')]);
+        if(count($results) > 0)
+        {
+            foreach($results as $row)
+            {
+                if($row->estado == 'Asignado')
+                {
+                    $request->session()->put('idPedido', $row->idpedidos);
+                    return redirect(route('retirarPedido'));
+                }
+
+                if($row->estado == 'En camino')
+                {
+                    $request->session()->put('idPedido', $row->idpedidos);
+                    return redirect(route('entregarPedido'));
+                }
+            }
+        }
+        else
+        {
+            return view('empezarARepartir');
+        }
+
     }
   
     
