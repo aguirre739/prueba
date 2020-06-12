@@ -83,3 +83,5 @@ Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinaliza
 
 //cerrar la sesiones de usuario
 Route::get('logoutUsuario', 'login@logout')->name('logoutUsuario');
+
+Route::get('estadoDelPedido', 'pedidos@estadoDelPedido')->name('estadoDelPedido')->middleware('autenticacion');

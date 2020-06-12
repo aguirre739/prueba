@@ -68,7 +68,7 @@ class pedidos extends Controller
         $pedido->id_tiposDeArticulo = $request->tipoDeArticulo;
         $pedido->valorDeArticulo = $request->valorEstimado;
         $pedido->tipoDePago = "Efectivo";
-        $pedido->estado = "Nuevo";
+        $pedido->estado = "Esperando a ser asignado a un cadete";
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
         
         $request->session()->put('pedidoCompleto', $pedido);
@@ -222,5 +222,10 @@ class pedidos extends Controller
 
     }
   
+    public function estadoDelPedido(Request $request)
+    {
+        $pedidos = DB::select("SELECT * FROM pedidos, tipos_de_articulos WHERE pedidos.clientes_idclientes = ? AND pedidos.estado != 'Finalizado' AND pedidos.id_tiposDeArticulo = tipos_de_articulos.idtipos_de_articulos", [$request->session()->get('idusuario')]);
+        return view('estadoDePedido', compact('pedidos'));
+    }
     
 }
