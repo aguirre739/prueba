@@ -21,8 +21,15 @@
         <div class="d-flex justify-content-center">
             <a href="{{ route('estadoDelPedido') }}">Ver Pedido</a>
         </div>
-    </div>
 
-   
+        <br>
+        <div class="d-flex justify-content-center">
+            <img src="images/lista.png" width="80">
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a href="{{ route('hisotiralDePedidosCliente') }}">Ver Historial de Pedidos</a>
+        </div>
+    </div>   
 
 @endsection

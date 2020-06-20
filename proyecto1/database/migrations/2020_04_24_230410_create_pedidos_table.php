@@ -31,6 +31,7 @@ class CreatePedidosTable extends Migration
             $table->string('tipoDePago');
             $table->float('montoDePago');
             $table->string('estado');
+            $table->dateTime('fechaHora', 0);
             $table->unsignedBigInteger('clientes_idclientes');
             $table->foreign('clientes_idclientes')->references('idclientes')->on('clientes');
             $table->unsignedBigInteger('cadetes_idcadetes')->nullable();

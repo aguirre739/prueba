@@ -8,6 +8,7 @@ use App;
 use App\Http\Controllers;
 use App\pedido;
 use Symfony\Component\VarDumper\VarDumper;
+Use \Carbon\Carbon;
 
 class pedidos extends Controller
 {
@@ -69,6 +70,7 @@ class pedidos extends Controller
         $pedido->valorDeArticulo = $request->valorEstimado;
         $pedido->tipoDePago = "Efectivo";
         $pedido->estado = "Esperando a ser asignado a un cadete";
+        $pedido->fechaHora = Carbon::now();
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
         
         $request->session()->put('pedidoCompleto', $pedido);
@@ -228,4 +230,27 @@ class pedidos extends Controller
         return view('estadoDePedido', compact('pedidos'));
     }
     
+    public function hisotiralDePedidosCliente(Request $request)
+    {
+        $pedidos = DB::table('pedidos')
+            ->where('pedidos.clientes_idclientes', '=', $request->session()->get('idusuario'))
+            ->where('pedidos.estado', '=', 'Finalizado')
+            ->join('tipos_de_articulos', 'tipos_de_articulos.idtipos_de_articulos', '=', 'pedidos.id_tiposDeArticulo')
+            ->orderBy('idpedidos', 'DESC')
+            ->paginate(1);
+
+        return view('historialDePedidos', compact('pedidos'));
+    }
+
+    public function hisotiralDePedidosCadete(Request $request)
+    {
+        $pedidos = DB::table('pedidos')
+            ->where('pedidos.cadetes_idcadetes', '=', $request->session()->get('idCadete'))
+            ->where('pedidos.estado', '=', 'Finalizado')
+            ->join('tipos_de_articulos', 'tipos_de_articulos.idtipos_de_articulos', '=', 'pedidos.id_tiposDeArticulo')
+            ->orderBy('idpedidos', 'DESC')
+            ->paginate(1);
+
+        return view('historialDePedidosCadete', compact('pedidos'));
+    }
 }

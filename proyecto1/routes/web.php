@@ -85,3 +85,7 @@ Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinaliza
 Route::get('logoutUsuario', 'login@logout')->name('logoutUsuario');
 
 Route::get('estadoDelPedido', 'pedidos@estadoDelPedido')->name('estadoDelPedido')->middleware('autenticacion');
+
+Route::get('hisotiralDePedidosCliente', 'pedidos@hisotiralDePedidosCliente')->name('hisotiralDePedidosCliente')->middleware('autenticacion');
+
+Route::get('hisotiralDePedidosCadete', 'pedidos@hisotiralDePedidosCadete')->name('hisotiralDePedidosCadete')->middleware('autenticacionCadete');
