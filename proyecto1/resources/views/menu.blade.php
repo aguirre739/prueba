@@ -2,7 +2,7 @@
 
 @section('contenido')
     <br><br><br><br>
-    <h4 class="text-center">Menu principal locura</h4>
+    <h4 class="text-center">Menu principal</h4>
     
     <div class="container-fluid mt-5">
         <div class="d-flex justify-content-center">
