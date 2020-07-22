@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <title>UrbanEnvios</title>
     <!-- Required meta tags -->
@@ -14,23 +14,22 @@
   <body>
 
 <header>
-        <header>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container">
-                            <a class="navbar-brand" href="#">
-                                <img src="images/logo.png" alt="logo" width="80" height="50"></a>
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('altaDeCliente') }}">Registrarse</a>
-                                                </li>
-                                            </ul>
-                                </div>
-                    </div>
-                </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="logo" width="80" height="50"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ route('altaDeCliente') }}">Registrarse</a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </nav>
 </header>
 
 <section class="container">
@@ -44,11 +43,11 @@
                     @csrf
                     <div class="form-group">
                             <label>Usuario o Email</label>
-                            <input type="text" name="mail" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required="">
+                            <input type="text" id="mail" name="mail" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required="">
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
-                            <input type="password" name="contrasenia" class="form-control" placeholder="contraseña" required="">
+                            <input type="password" id="contrasenia" name="contrasenia" class="form-control" placeholder="contraseña" required="">
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input">
