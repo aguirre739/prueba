@@ -66,9 +66,7 @@ Route::get('menuCadete', function ()
     return view('menuCadete');
 })->name('menuCadetes')->middleware('autenticacionCadete');
 
-Route::get('empezarRepartos', function () {
-    return view('empezarARepartir');
-})->name('empezarARepartir')->middleware('autenticacionCadete');
+Route::get('empezarRepartos', 'pedidos@empezarRepartos')->name('empezarARepartir')->middleware('autenticacionCadete');
 
 // Route::post('buscarPedidos', 'pedidos@buscarPedidos');
 
@@ -82,3 +80,12 @@ Route::get('retirarPedido', 'pedidos@retirarPedido')->name('retirarPedido')->mid
 Route::get('entregarPedido', 'pedidos@entregarPedido')->name('entregarPedido')->middleware('autenticacionCadete');
 
 Route::get('pedidoFinalizado', 'pedidos@pedidoFinalizado')->name('pedidoFinalizado')->middleware('autenticacionCadete');
+
+//cerrar la sesiones de usuario
+Route::get('logoutUsuario', 'login@logout')->name('logoutUsuario');
+
+Route::get('estadoDelPedido', 'pedidos@estadoDelPedido')->name('estadoDelPedido')->middleware('autenticacion');
+
+Route::get('hisotiralDePedidosCliente', 'pedidos@hisotiralDePedidosCliente')->name('hisotiralDePedidosCliente')->middleware('autenticacion');
+
+Route::get('hisotiralDePedidosCadete', 'pedidos@hisotiralDePedidosCadete')->name('hisotiralDePedidosCadete')->middleware('autenticacionCadete');

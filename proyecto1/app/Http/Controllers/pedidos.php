@@ -8,6 +8,7 @@ use App;
 use App\Http\Controllers;
 use App\pedido;
 use Symfony\Component\VarDumper\VarDumper;
+Use \Carbon\Carbon;
 
 class pedidos extends Controller
 {
@@ -68,7 +69,8 @@ class pedidos extends Controller
         $pedido->id_tiposDeArticulo = $request->tipoDeArticulo;
         $pedido->valorDeArticulo = $request->valorEstimado;
         $pedido->tipoDePago = "Efectivo";
-        $pedido->estado = "nuevo";
+        $pedido->estado = "Esperando a ser asignado a un cadete";
+        $pedido->fechaHora = Carbon::now();
         $pedido->clientes_idclientes = $request->session()->get('idusuario');
         
         $request->session()->put('pedidoCompleto', $pedido);
@@ -114,6 +116,10 @@ class pedidos extends Controller
         // $datos = App\pedido::findOrFail($idPedido);
         if ($idPedido != 0)
         {
+            $pedido = App\pedido::findOrFail($idPedido);
+            $pedido->cadetes_idcadetes = $request->idCadete;
+            $pedido->save();
+
             return response()->json([
                 "idpedido" => $idPedido
             ], 200);
@@ -140,8 +146,8 @@ class pedidos extends Controller
         if(isset($request->btnAceptar))
         {
             $pedido = App\pedido::find($request->btnAceptar);
-            $pedido->cadetes_idcadetes = $request->session()->get('idCadete');
-            $pedido->estado = "asginado";
+            //$pedido->cadetes_idcadetes = $request->session()->get('idCadete');
+            $pedido->estado = "Asignado";
             $pedido->save();
             //echo "se acepto el pedido ".$request->btnAceptar;
             return redirect(route('retirarPedido'));
@@ -149,6 +155,8 @@ class pedidos extends Controller
 
         if(isset($request->btnRechazar))
         {
+            DB::update('UPDATE pedidos SET cadetes_idcadetes = null WHERE pedidos.idpedidos = ?', [$request->btnRechazar]);
+
             $pedidoRechazado = new App\pedidoRechazado();
 
             $pedidoRechazado->cadetes_idcadetes = $request->session()->get('idCadete');
@@ -187,6 +195,62 @@ class pedidos extends Controller
         $pedido->save();
         return view('pedidoFinalizado');
     }
+
+    public function empezarRepartos(Request $request)
+    {
+        //primero busca si no tiene pedidos pendientes
+        $results = DB::select("SELECT * FROM pedidos WHERE pedidos.cadetes_idcadetes = ? AND pedidos.estado = 'Asignado' OR pedidos.estado = 'En camino'", [$request->session()->get('idCadete')]);
+        if(count($results) > 0)
+        {
+            foreach($results as $row)
+            {
+                if($row->estado == 'Asignado')
+                {
+                    $request->session()->put('idPedido', $row->idpedidos);
+                    return redirect(route('retirarPedido'));
+                }
+
+                if($row->estado == 'En camino')
+                {
+                    $request->session()->put('idPedido', $row->idpedidos);
+                    return redirect(route('entregarPedido'));
+                }
+            }
+        }
+        else
+        {
+            return view('empezarARepartir');
+        }
+
+    }
   
+    public function estadoDelPedido(Request $request)
+    {
+        $pedidos = DB::select("SELECT * FROM pedidos, tipos_de_articulos WHERE pedidos.clientes_idclientes = ? AND pedidos.estado != 'Finalizado' AND pedidos.id_tiposDeArticulo = tipos_de_articulos.idtipos_de_articulos", [$request->session()->get('idusuario')]);
+        return view('estadoDePedido', compact('pedidos'));
+    }
     
+    public function hisotiralDePedidosCliente(Request $request)
+    {
+        $pedidos = DB::table('pedidos')
+            ->where('pedidos.clientes_idclientes', '=', $request->session()->get('idusuario'))
+            ->where('pedidos.estado', '=', 'Finalizado')
+            ->join('tipos_de_articulos', 'tipos_de_articulos.idtipos_de_articulos', '=', 'pedidos.id_tiposDeArticulo')
+            ->orderBy('idpedidos', 'DESC')
+            ->paginate(1);
+
+        return view('historialDePedidos', compact('pedidos'));
+    }
+
+    public function hisotiralDePedidosCadete(Request $request)
+    {
+        $pedidos = DB::table('pedidos')
+            ->where('pedidos.cadetes_idcadetes', '=', $request->session()->get('idCadete'))
+            ->where('pedidos.estado', '=', 'Finalizado')
+            ->join('tipos_de_articulos', 'tipos_de_articulos.idtipos_de_articulos', '=', 'pedidos.id_tiposDeArticulo')
+            ->orderBy('idpedidos', 'DESC')
+            ->paginate(1);
+
+        return view('historialDePedidosCadete', compact('pedidos'));
+    }
 }

@@ -30,4 +30,10 @@ class login extends Controller
             return back()->with('mensaje', 'Usuario o contraseña incorrectos');
         }
     }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect(route('login'));
+    }
 }

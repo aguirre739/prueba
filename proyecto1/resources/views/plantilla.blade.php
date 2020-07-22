@@ -22,7 +22,7 @@
             <li class="nav-item active"><p class="navbar-brand"> UrbanEnvios | {{ session('usuario') }}</p></li>
           </ul> 
 
-          <a class="btn btn-primary" href="../controller/cerrarSesionController.php">Cerrar Sesion</a> 
+          <a class="btn btn-primary" href="{{ route('logoutUsuario') }}">Cerrar Sesion</a> 
       </div>
     </nav>
     @yield('contenido')        

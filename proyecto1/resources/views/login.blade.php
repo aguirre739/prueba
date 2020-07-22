@@ -43,11 +43,19 @@
                     @csrf
                     <div class="form-group">
                             <label>Usuario o Email</label>
+<<<<<<< HEAD
                             <input type="text" id="mail" name="mail" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required="">
                         </div>
                         <div class="form-group">
                             <label>Contraseña</label>
                             <input type="password" id="contrasenia" name="contrasenia" class="form-control" placeholder="contraseña" required="">
+=======
+                            <input type="text" name="mail" class="form-control" placeholder="Ingresa tu usuario o tu email registrado" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" name="contrasenia" class="form-control" placeholder="contraseña" required>
+>>>>>>> ceaec4e00f40c53b29eb2d4f27765bc32a6f45f3
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input">
