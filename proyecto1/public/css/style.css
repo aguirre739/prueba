@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.fondoNav{
+    background-color: #5F0F40;
+}
+
+.fondoBody{
+    background-color: #FEEFAF;
+}
+
+.fondoFormulario{
+    background-color: #321325;
+}
+
+/* para que el titulo no se esconda detras del navbar */
+.main{
+    margin-top: 72px;
+}
+
+/* .boton{
+    background-color: #CB793A;
+    color: white;
+} */
