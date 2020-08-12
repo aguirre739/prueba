@@ -4,15 +4,15 @@
 }
 
 .fondoNav{
-    background-color: #5F0F40;
+    background-color: #37392e;
 }
 
 .fondoBody{
-    background-color: #FEEFAF;
+    background-color: #EEE5E5;
 }
 
 .fondoFormulario{
-    background-color: #321325;
+    background-color: #19647E;
 }
 
 /* para que el titulo no se esconda detras del navbar */
@@ -20,7 +20,35 @@
     margin-top: 72px;
 }
 
+.footer-calc{
+    min-height: calc(100vh - 76px - 70px);
+}
+
 /* .boton{
     background-color: #CB793A;
     color: white;
 } */
+
+/* IMAGEN PRINCIPAL */
+.site-hero, .site-hero > .container > .row {
+    height: 100vh;
+    min-height: 770px; }
+  
+  .site-hero .heading-wrap {
+    position: relative;
+    margin-right: -200px;
+    z-index: 2; }
+  
+  .site-hero .heading {
+    font-size: 80px;
+    color: #e4ae50;
+    line-height: 1;
+    font-weight: 700;
+    font-family: "Montserrat",  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Noto Color Emoji"; }
+  
+  .site-hero figure {
+    position: absolute;
+    z-index: -1;
+    right: 0; }
+
+  

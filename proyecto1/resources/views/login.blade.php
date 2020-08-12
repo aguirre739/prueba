@@ -35,10 +35,9 @@
 @extends('menu')
 
 @section('contenido')
-<div class="container">
-        <h1 class="display-4 text-center py-4 main lead">Inicia Sesión</h1>
-
-        <div class="row">
+    <h1 class="display-4 text-center py-4 main lead">Inicia Sesión</h1>
+        <div class="container my-3">
+            <div class="d-flex justify-content-center">
             <div class="col-sm-12 col-md-6">
                 <form action="{{ route('loginCliente')}}" method="POST" class="text-light fondoFormulario shadow-lg p-3 mb-5 rounded">
                     @csrf
@@ -54,15 +53,23 @@
                             <input type="checkbox" class="form-check-input">
                             <label class="form-check-label">Recordarme</label>
                         </div>
-                        <button class="btn btn-success btn-lg btn-block"><i class="fas fa-sign-in-alt fa-1x" aria-hidden="true"></i>Ingresar</button>
-                        <small class="form-text text-muted">¿Olvidaste tu contraseña? <a href="#" data-toggle="modal" data-target="#resetModal">Olvidé mis
+                        <button class="btn btn-info btn-block"><i class="fas fa-sign-in-alt fa-1x mx-2" aria-hidden="true"></i>Ingresar</button>
+                        <small class="form-text text-white">¿Olvidaste tu contraseña? <a href="#" data-toggle="modal" data-target="#resetModal">Olvidé mis
                                 datos</a></small>
+                                <hr>
+                        <div class="pb-4">
+                            <p class="lead text-center">¿No tienes una cuenta? <a href="{{ route('altaDeCliente') }}">Registrate</a></p>
+                            <p class="lead text-center">...o ingresa con...</p>
+                            <a class="btn btn-primary btn-block" href="#"><i class="fab fa-facebook-square fa-1x" aria-hidden="true"></i>
+                                Facebook</a>
+                            <a class="btn btn-danger btn-block" href="#"><i class="fab fa-google fa-1x" aria-hidden="true"></i> Google</a>
+                        </div>
                 </form>
                 @if ( session('mensaje') )
                     <div class="alert alert-info">{{ session('mensaje') }}</div>
                 @endif
             </div>
-            <div class="col-sm-12 col-md-6">
+            <!-- <div class="col-sm-12 col-md-6">
                     <div class="pb-4">
                             <p class="lead text-center">¿No tienes una cuenta? <a href="{{ route('altaDeCliente') }}">Registrate</a></p>
                             <p class="lead text-center">...o ingresa con...</p>
@@ -70,14 +77,12 @@
                                 Facebook</a>
                             <a class="btn btn-danger btn-lg btn-block" href="#"><i class="fab fa-google fa-1x" aria-hidden="true"></i> Google</a>
                         </div>
+            </div> -->
             </div>
+            <center>
+                    <a class="btn btn-danger" href="{{ route('altaCadete') }}">Quieres ser un cadete? Unetenos!!!</a>
+            </center>
         </div>
-
-                <center>
-                    <a href="{{ route('altaCadete') }}">Quieres ser un cadete? Unetenos!!!</a>
-                </center>
-
-</div>
 @endsection
 
 

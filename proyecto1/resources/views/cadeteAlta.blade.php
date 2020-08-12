@@ -1,8 +1,8 @@
 @extends('menu')
 
 @section('contenido')
-<br><br><br><br>
-    <h2 class="text-center">Agregar Cadete</h2>
+
+    <h2 class="display-4 text-center py-4 main lead">Agregar Cadete</h2>
 
     @error('mail')
         <div class="d-flex justify-content-center">
@@ -12,7 +12,7 @@
 
 <form action="{{ route('altaDeCadete')}}" method="POST" enctype="multipart/form-data">
     @csrf
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     Nombre
