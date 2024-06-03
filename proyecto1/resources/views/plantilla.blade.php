@@ -10,31 +10,46 @@
     <link rel="icon" type="image/ico" href="images/UE_icono.ico"/>
 
     <!-- Bootstrap CSS -->
-    <link href="bootstrap/sticky-footer-navbar.css" rel="stylesheet">
-
+    <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/34fc8d25de.js" crossorigin="anonymous"></script>
   </head>
-  <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <body class="fondoBody">
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top fondoNav">
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active"><p class="navbar-brand"> UrbanEnvios | {{ session('usuario') }}</p></li>
           </ul> 
 
-          <a class="btn btn-primary" href="{{ route('logoutUsuario') }}">Cerrar Sesion</a> 
+          <a class="btn bt-outline btn-primary" href="{{ route('logoutUsuario') }}">Cerrar Sesion</a> 
       </div>
     </nav>
     @yield('contenido')        
     
-    <br>
-    <footer class="footer article mt-2">
-      <div class="container"> 
-        <span class="text-muted">
-          <p>Final Programacion Web</p>
-        </span> 
-      </div>
-    </footer>   
+    <footer class="bg-dark text-light">
+            <div class="container">
+                    <div class="row py-2 lead">
+                            <div class="col-sm-12 col-md-4 text-center">
+                                <p>Encuentranos en nuestras redes sociales</p>
+                                <i class="fa fa-facebook-official fa-2x mr-1" aria-hidden="true"></i>
+                                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-sm-12 col-md-4 text-center">
+                                <a href="#">Contactanos</a><br>
+                                <a href="#">Nosotros</a>
+                            </div>
+                            <div class="col-sm-12 col-md-4 text-center">
+                                <img src="images/logo.png" alt="logo" width="120" height="80">
+                            </div>
+                            <hr>
+                    </div>
+                    <div class="py-2">
+                        <p class="text-center lead">Final de Programacion Web 2020. &copy;Todos los derechos reservados</p>
+                    </div>
+            </div>
+    </footer>  
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
