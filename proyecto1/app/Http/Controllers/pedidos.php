@@ -146,7 +146,7 @@ class pedidos extends Controller
         if(isset($request->btnAceptar))
         {
             $pedido = App\pedido::find($request->btnAceptar);
-            //$pedido->cadetes_idcadetes = $request->session()->get('idCadete');
+            $pedido->cadetes_idcadetes = $request->session()->get('idCadete');
             $pedido->estado = "Asignado";
             $pedido->save();
             //echo "se acepto el pedido ".$request->btnAceptar;
@@ -200,6 +200,7 @@ class pedidos extends Controller
     {
         //primero busca si no tiene pedidos pendientes
         $results = DB::select("SELECT * FROM pedidos WHERE pedidos.cadetes_idcadetes = ? AND pedidos.estado = 'Asignado' OR pedidos.estado = 'En camino'", [$request->session()->get('idCadete')]);
+        // dd($results);
         if(count($results) > 0)
         {
             foreach($results as $row)
